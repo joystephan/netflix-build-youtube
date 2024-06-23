@@ -12,7 +12,7 @@ function Banner() {
             const request = await axios.get(requests.fetchNetflixOriginals);
             setMovie(
                 request.data.results[
-                    Math.floor((Math.random()*request.data.results).length-1)
+                    Math.floor(Math.random() * request.data.results.length - 1)
                 ]
             );
             return request;
@@ -20,6 +20,7 @@ function Banner() {
 
         fetchData();
     }, [])
+
     console.log(movie);
 
       function truncate(string, n) {
@@ -27,15 +28,16 @@ function Banner() {
  
 
       }
+      
 
      return (
         <header className="banner" 
          style={{
-            backgroudSize: "cover",
+            backgroundSize: "cover",
             backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
             backgroundPosition: "center center",
-
-        }}>
+          }}
+        >
 
             <div className="banner__contents">
                 <h1 className="banner__title">
