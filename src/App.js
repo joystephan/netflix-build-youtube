@@ -24,14 +24,14 @@ function App() {
           email: userAuth.email
         }))
       }else {
-        dispatch(logout);
+        dispatch(logout());
 
       }
     });
 
 
      return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="app">
