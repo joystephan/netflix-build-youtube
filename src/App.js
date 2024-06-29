@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen"; 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen";
 import { auth } from "./firebase";
-import {  selectUser } from "./features/userSlice";
-import { login, logout } from './features/userSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout, selectUser } from './features/userSlice';
+import ProfileScreen from "./screens/ProfileScreen";
+
+
 
 
 
@@ -40,8 +42,11 @@ function App() {
           <LoginScreen />
         ) : (
           <Routes>
+            <Route path="/profile">
+             <ProfileScreen />
+            </Route>
             <Route exact path="/">
-             <Route path="/" element={<HomeScreen />} />
+             <HomeScreen />
             </Route>
           </Routes>
         )}
