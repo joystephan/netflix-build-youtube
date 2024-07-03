@@ -1,27 +1,28 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../features/userSlice';
-import Nav from "../Nav";
-import "./ProfileScreen.css";
-
+import './ProfileScreen.css';  // Adjusted for ProfileScreen's own CSS (if any)
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, selectUser } from '../features/userSlice';
+import { auth } from '../firebase';
 
 function ProfileScreen() {
-    const user = useSelector(selectUser);
-  return (
-    <div className="profileScreen">
-        <Nav />
-        <div className='profileScreen__body'>
-            <h1>Edit Profile</h1>
-            <div className='profileScreen__info'>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmX1IYrleu5pZkTWvD6cBrp4E0knysir8f-A&s" alt=""/>
-                <div className='profileScreen__details'>
-                    <h2>{user.email}</h2>
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
-                </div>
-            </div>
-        </div>
+  const signOut = () => {
+    auth.signOut().then(() => {
+      dispatch(logout());
+    });
+  };
+
+  return (
+    <div className='profileScreen'>
+      <h1>Profile Screen</h1>
+      <div className='profileScreen__info'>
+        <h2>{user.email}</h2>
+        <button onClick={signOut}>Sign Out</button>
+      </div>
     </div>
-  )
+  );
 }
 
-export default ProfileScreen
+export default ProfileScreen;
